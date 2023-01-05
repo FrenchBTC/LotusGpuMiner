@@ -1,7 +1,9 @@
 # Lotus GPU Miner
 
-The Lotus GPU miner is a simple non-pool miner for the Lotus network. It
+This fork of the Lotus GPU miner is a simple pool miner for the Lotus network. It
 uses OpenCL to mine Lotus blocks on your GPU.
+
+It is modified to allow mining on a pool, like the one available at https://lotus-pool.frenchbtc.fr (RPC only).
 
 # Configuration
 
