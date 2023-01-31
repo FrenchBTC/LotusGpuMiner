@@ -36,6 +36,8 @@ __constant uint CHAIN_LAYER_SCHEDULE_ARRAY[64] = {
 #define rot(x, y) rotate((num_t)x, (num_t)y)
 #define rotr(x, y) rotate((num_t)x, (num_t)(32-y))
 
+#define CHECK_BIT(var,pos) ((var) & (1<<(pos)))
+
 num_t sigma0(num_t a) {
     return rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
 }
@@ -156,7 +158,24 @@ __kernel void search(
         sha256_pow_layer(pow_layer, &chain_layer[8]);
         sha256_chain_layer(chain_layer, hash);
         
-        if (hash[7] == 0) {
+        if(
+            CHECK_BIT(hash[7], 0 - 1) == 0
+            && CHECK_BIT(hash[7], 1 - 1) == 0
+            && CHECK_BIT(hash[7], 2 - 1) == 0
+            && CHECK_BIT(hash[7], 3 - 1) == 0
+            && CHECK_BIT(hash[7], 4 - 1) == 0
+            && CHECK_BIT(hash[7], 5 - 1) == 0
+            && CHECK_BIT(hash[7], 6 - 1) == 0
+            && CHECK_BIT(hash[7], 7 - 1) == 0
+            && CHECK_BIT(hash[7], 8 - 1) == 0
+            && CHECK_BIT(hash[7], 9 - 1) == 0
+            && CHECK_BIT(hash[7], 10 - 1) == 0
+            && CHECK_BIT(hash[7], 11 - 1) == 0
+            && CHECK_BIT(hash[7], 12 - 1) == 0
+            && CHECK_BIT(hash[7], 13 - 1) == 0
+            && CHECK_BIT(hash[7], 14 - 1) == 0
+            && CHECK_BIT(hash[7], 15 - 1) == 0
+        ){
             output[FOUND] = 1;
             output[NFLAG & nonce] = nonce;
         }
